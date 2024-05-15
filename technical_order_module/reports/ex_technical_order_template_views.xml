@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="ex_order_report" model="ir.actions.report">
+            <field name="name">Technical Ex Order Report</field>
+            <field name="model">technical.order</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="binding_model_id" ref="model_technical_order"/>
+            <field name="binding_type">report</field>
+            <field name="report_name">technical_order_module.order_report_template</field>
+            <field name="report_file">technical_order_module.technical_order_template_views.xml</field>
+        </record>
+
+        <template id="order_report_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="web.internal_layout">
+                        <t class="page">
+                            <div class="text-center mb-4">
+                                <span style="font-size:40px;font-weight:bold">Order Report</span>
+                            </div>
+                        </t>
+                    </t>
+                </t>
+            </t>
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Sequence</th>
+                        <th>Request Name</th>
+                        <th>Requested By</th>
+                        <th>Customer</th>
+                        <th>rejection Reason</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Order Lines</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr t-foreach="docs" t-as="doc">
+                        <td>
+                            <span t-field="doc.sequence"/>
+                        </td>
+                        <td>
+                            <span t-field="doc.request_name"/>
+                        </td>
+                        <td>
+                            <span t-field="doc.requested_by_id"/>
+                        </td>
+                        <td>
+                            <span t-field="doc.customer_id"/>
+                        </td>
+                        <td>
+                            <span t-field="doc.rejection_reason"/>
+                        </td>
+                        <td>
+                            <span t-field="doc.start_date"/>
+                        </td>
+                        <td>
+                            <span t-field="doc.end_date"/>
+                        </td>
+                        <td>
+                            <span t-field="doc.order_lines"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <br/>
+            <br/>
+            <br/>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Description</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr t-foreach="docs.order_lines" t-as="lines">
+                        <td>
+                            <span t-field="lines.product_id"/>
+                        </td>
+                        <td>
+                            <span t-field="lines.description"/>
+                        </td>
+                        <td>
+                            <span t-field="lines.quantity"/>
+                        </td>
+                        <td>
+                            <span t-field="lines.price"/>
+                        </td>
+                        <td>
+                            <span t-field="lines.total"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </template>
+    </data>
+</odoo>

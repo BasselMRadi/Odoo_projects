@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+access_technical_order_id,access_technical_order,model_technical_order,,1,1,1,1
+access_res_partner,access_res_partner,model_res_partner,,1,1,1,1
+access_technical_order_line_id,access_technical_order_line,model_technical_order_line,,1,1,1,1
+access_reject_reason,access_reject_reason,model_reject_reason,,1,1,1,1
